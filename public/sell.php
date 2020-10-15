@@ -1,8 +1,8 @@
 <?php
-    // configuration
+    // add the configuration php done previously changed
     require("../includes/config.php");  
     
-    // if form is submitted
+    // 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
         
@@ -27,9 +27,16 @@
         redirect("/");
     }
     
-    // if form hasn't been submitted
-    else
+    // if form hasn't been submitted select from tb2
+    if else
     {
+        
+        $rows =	query("SELECT * FROM tb2 WHERE id = ?", $_SESSION["id"]);	
+       
+    }
+// else go through table 1 anyways and render the sell form through table 1
+else
+{
         
         $rows =	query("SELECT * FROM tb1 WHERE id = ?", $_SESSION["id"]);	
        
@@ -43,7 +50,7 @@
             
             $stocks[] = $stock;       
         }    
-        // render sell form
+        // render sell form with selling stocks
         render("sell.php", ["title" => "Sell", "stocks" => $stocks]);
     }
       
